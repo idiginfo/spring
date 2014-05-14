@@ -15,6 +15,7 @@ import org.idiginfo.docsvc.model.citagora.Reply;
 import org.idiginfo.docsvc.model.citagora.Review;
 import org.idiginfo.docsvc.model.citagora.Tag;
 import org.idiginfo.docsvc.model.citagora.UriObject;
+import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  * Factory to create citagora objects
@@ -43,6 +44,11 @@ public abstract class CitagoraFactory {
 
 	public static CitagoraFactory getFactory() {
 		return factory;
+	}
+
+	@Autowired
+	public static void setFactory(CitagoraFactory factory) {
+		CitagoraFactory.factory = factory;
 	}
 
 	public abstract void renewPersistence();

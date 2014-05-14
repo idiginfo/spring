@@ -26,6 +26,7 @@ import org.idiginfo.docsvc.model.citagora.Reply;
 import org.idiginfo.docsvc.model.citagora.Review;
 import org.idiginfo.docsvc.model.citagora.Tag;
 import org.idiginfo.docsvc.model.citagora.UriObject;
+import org.springframework.stereotype.Service;
 
 /**
  * Class to support Citagora object creation and persistence management
@@ -33,7 +34,7 @@ import org.idiginfo.docsvc.model.citagora.UriObject;
  * @author griccardi
  * 
  */
-
+@Service
 public class CitagoraFactoryImpl extends CitagoraFactory {
 	private EntityManagerFactory emf;
 	@PersistenceContext
