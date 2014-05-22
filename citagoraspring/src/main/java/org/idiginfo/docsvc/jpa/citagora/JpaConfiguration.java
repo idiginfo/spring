@@ -21,7 +21,7 @@ public class JpaConfiguration {
 	@Value("#{dataSource}")
 	private javax.sql.DataSource dataSource;
 
-	@Bean
+	//@Bean
 	public Map<String, Object> jpaProperties() {
 		Map<String, Object> props = new HashMap<String, Object>();
 		props.put("loadTimeWeaver",
@@ -44,19 +44,20 @@ public class JpaConfiguration {
 	@Bean
 	public PlatformTransactionManager transactionManager() {
 		JpaTransactionManager txManager = new JpaTransactionManager();
-		EntityManagerFactory obj = localContainerEntityManagerFactoryBean()
+		EntityManagerFactory obj = entityManagerFactoryBean()
 				.getObject();
 		txManager.setEntityManagerFactory(obj);
 		return txManager;
 	}
 
 	@Bean
-	public LocalContainerEntityManagerFactoryBean localContainerEntityManagerFactoryBean() {
-		LocalContainerEntityManagerFactoryBean lef = new LocalContainerEntityManagerFactoryBean();
-		lef.setDataSource(this.dataSource);
-		lef.setJpaPropertyMap(this.jpaProperties());
-		lef.setJpaVendorAdapter(this.jpaVendorAdapter());
-		return lef;
+	public LocalContainerEntityManagerFactoryBean entityManagerFactoryBean() {
+		LocalContainerEntityManagerFactoryBean emfBean = new LocalContainerEntityManagerFactoryBean();
+		emfBean.setDataSource(this.dataSource);
+		emfBean.setJpaPropertyMap(this.jpaProperties());
+		emfBean.setJpaVendorAdapter(this.jpaVendorAdapter());
+		emfBean.setPackagesToScan("org.idiginfo.docsvc.jpa.citagora");
+		return emfBean;
 	}
 
 }

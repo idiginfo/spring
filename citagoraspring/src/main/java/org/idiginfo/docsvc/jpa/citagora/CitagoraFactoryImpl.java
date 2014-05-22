@@ -36,7 +36,7 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class CitagoraFactoryImpl extends CitagoraFactory {
-	private EntityManagerFactory emf;
+	//private EntityManagerFactory emf;
 	@PersistenceContext
 	private EntityManager em;
 
@@ -255,21 +255,21 @@ public class CitagoraFactoryImpl extends CitagoraFactory {
 
 	@Override
 	public void init() {
-		if (emf == null)
-			emf = Persistence.createEntityManagerFactory(persistence);
-		if (em != null)
-			em.close();
-		em = emf.createEntityManager();
+		// if (emf == null)
+		// emf = Persistence.createEntityManagerFactory(persistence);
+		// if (em != null)
+		// em.close();
+		// em = emf.createEntityManager();
 	}
 
 	@Override
 	public void renewPersistence() {
-		if (em != null)
-			em.close();
-		em = null;
-		if (emf != null)
-			emf.close();
-		emf = null;
+		// if (em != null)
+		// em.close();
+		// em = null;
+		// if (emf != null)
+		// emf.close();
+		// emf = null;
 		init();
 	}
 

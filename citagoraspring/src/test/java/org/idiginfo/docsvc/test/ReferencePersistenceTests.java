@@ -6,11 +6,16 @@ import static org.junit.Assert.assertNotNull;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
+import org.idiginfo.docsvc.factories.CitagoraFactory;
 import org.idiginfo.docsvc.jpa.citagora.PersonImpl;
 import org.idiginfo.docsvc.jpa.citagora.ReferenceImpl;
+import org.idiginfo.docsvc.model.citagora.Author;
+import org.idiginfo.docsvc.model.citagora.CitagoraAgent;
+import org.idiginfo.docsvc.model.citagora.Person;
 import org.idiginfo.docsvc.model.citagora.Reference;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
@@ -21,22 +26,29 @@ public class ReferencePersistenceTests {
 
 	@PersistenceContext
 	private EntityManager entityManager;
+	@PersistenceContext
+	private EntityManager entityManager2;
+	
+	@Autowired
+	CitagoraFactory factory;
 
 	@Test
 	@Transactional
 	public void testSaveOrderWithItems() throws Exception {
-		Reference ref = new ReferenceImpl();
+		Reference ref  = factory.createReference();
 		
 		entityManager.persist(ref);
 		entityManager.flush();
 		assertNotNull(ref.getMyId());
+		assertEquals(entityManager, entityManager2);
 	}
 
 	@Test
 	@Transactional
 	public void testSaveAndGet() throws Exception {
-		Reference ref = new ReferenceImpl();
-		ref.addAuthor(new PersonImpl("author"));
+		Reference ref = factory.createReference();
+		Author author = factory.createAuthor();
+		ref.addAuthor(author);
 		entityManager.persist(ref);
 		entityManager.flush();
 		// Otherwise the query returns the existing order (and we didn't set the

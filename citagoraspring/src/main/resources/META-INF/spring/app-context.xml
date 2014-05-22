@@ -8,7 +8,8 @@
 		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd">
 
-	<description>Connection to citagora-dev database on localhost</description>
+	<description>Connection to citagora-dev database on localhost
+	</description>
 
 	<!-- JDBC Data Source. It is assumed you have MySQL running on localhost 
 		port 3306 with username root and blank password. Change below if it's not 
@@ -22,11 +23,19 @@
 		<property name="validationQuery" value="SELECT 1" />
 	</bean>
 
-	<tx:annotation-driven transaction-manager="transactionManager" />
+	<!-- <tx:annotation-driven transaction-manager="transactionManager" /> -->
 
 	<context:component-scan base-package="org.idiginfo.docsvc.jpa.citagora" />
 
 	<context:component-scan base-package="org.idiginfo.docsvc.test" />
 	<context:component-scan base-package="org.idiginfo.docsvc.model.citagora" />
 
+	<bean id="citagoraFactoryImpl" class="org.idiginfo.docsvc.jpa.citagora.CitagoraFactoryImpl" />
+	<bean id="referenceImpl" class="org.idiginfo.docsvc.jpa.citagora.ReferenceImpl" />
+
+	<bean id="referenceTest" class="org.idiginfo.docsvc.test.ReferenceImplTest" />
+	<bean id="refImpl" class="java.lang.String">
+		<constructor-arg type="java.lang.String"
+			value="org.idiginfo.docsvc.test.ReferenceImplTest" />
+	</bean>
 </beans>

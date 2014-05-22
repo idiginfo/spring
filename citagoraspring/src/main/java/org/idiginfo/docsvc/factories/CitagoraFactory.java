@@ -27,20 +27,26 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 public abstract class CitagoraFactory {
 
-	protected static CitagoraFactory factory = null;
 	protected static String persistence = "local";
-	
-	static {
-		try {
-			Class<?> factoryClass = Class
-					.forName("org.idiginfo.docsvc.jpa.citagora.CitagoraFactoryImpl");
-			factory = (CitagoraFactory) factoryClass.getConstructor()
-					.newInstance();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+
+	static class FactoryObject {
+		@Autowired
+		public CitagoraFactory factory;
 	}
 
+	static FactoryObject factoryObject = new FactoryObject();
+	protected static CitagoraFactory factory = factoryObject.factory;
+
+	// static {
+	// try {
+	// Class<?> factoryClass = Class
+	// .forName("org.idiginfo.docsvc.jpa.citagora.CitagoraFactoryImpl");
+	// factory = (CitagoraFactory) factoryClass.getConstructor()
+	// .newInstance();
+	// } catch (Exception e) {
+	// e.printStackTrace();
+	// }
+	// }
 
 	public static CitagoraFactory getFactory() {
 		return factory;
@@ -49,6 +55,8 @@ public abstract class CitagoraFactory {
 	@Autowired
 	public static void setFactory(CitagoraFactory factory) {
 		CitagoraFactory.factory = factory;
+		Boolean.getBoolean("use.nosql.storage");
+
 	}
 
 	public abstract void renewPersistence();
