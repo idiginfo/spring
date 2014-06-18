@@ -33,8 +33,9 @@
 	<bean id="citagoraFactoryImpl" class="org.idiginfo.docsvc.jpa.citagora.CitagoraFactoryImpl" />
 	<bean id="referenceImpl" class="org.idiginfo.docsvc.jpa.citagora.ReferenceImpl" />
 
-	<bean id="referenceTest" class="org.idiginfo.docsvc.test.ReferenceImplTest" />
-	<bean id="refImpl" class="java.lang.String">
+<!-- 	<bean id="referenceTest" class="org.idiginfo.docsvc.test.ReferenceImplTest" />
+ -->
+ 	<bean id="refImpl" class="java.lang.String">
 		<constructor-arg type="java.lang.String"
 			value="org.idiginfo.docsvc.test.ReferenceImplTest" />
 	</bean>

@@ -29,12 +29,8 @@ public abstract class CitagoraFactory {
 
 	protected static String persistence = "local";
 
-	static class FactoryObject {
-		@Autowired
-		public CitagoraFactory factory;
-	}
 
-	static FactoryObject factoryObject = new FactoryObject();
+	static FactoryObjectContainer factoryObject = new FactoryObjectContainer();
 	protected static CitagoraFactory factory = factoryObject.factory;
 
 	// static {
